@@ -6,7 +6,13 @@ public enum Drinks {
     TEA("T"),
     CHOCHOLATE("H");
 
-    Drinks(String drink) {
+    private final String drink;
 
+    Drinks(String drink) {
+        this.drink = drink;
+    }
+
+    public String getDrink() {
+        return this.drink;
     }
 }

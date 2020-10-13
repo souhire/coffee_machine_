@@ -66,4 +66,37 @@ public class CoffeeMachineTest {
 
     }
 
+    @Test
+    public void testOrderOrangeJuice() {
+        Order order = new Order(Drinks.ORANGE);
+
+        assertEquals("O::", this.coffeeMachine.payOrder(order, 60));
+
+    }
+
+    @Test
+    public void testExtraHotCoffee() {
+        Order order = new Order(Drinks.COFFEE);
+        order.setExtraHot();
+
+        assertEquals("Ch::", this.coffeeMachine.payOrder(order, 60));
+    }
+
+    @Test
+    public void testExtraHotChocolate() {
+        Order order = new Order(Drinks.CHOCHOLATE);
+        order.setExtraHot();
+        order.addSugar();
+        assertEquals("Hh:1:", this.coffeeMachine.payOrder(order, 60));
+    }
+
+    @Test
+    public void testExtraHotTea() {
+        Order order = new Order(Drinks.TEA);
+        order.setExtraHot();
+        order.addSugar();
+        order.addSugar();
+        assertEquals("Th:2:", this.coffeeMachine.payOrder(order, 60));
+    }
+
 }

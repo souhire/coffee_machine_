@@ -10,7 +10,7 @@ public class CoffeeMachineTest {
 
     @Before
     public void setUp() {
-        coffeeMachine = new CoffeeMachine();
+        coffeeMachine = new CoffeeMachine(new CoffeeMachineReport());
     }
 
     @Test
@@ -98,18 +98,15 @@ public class CoffeeMachineTest {
 
     @Test
     public void testReport() {
-        CoffeeMachineReport cmr = new CoffeeMachineReport();
-        assertEquals("C:0;H:0;O:0;T:0;0", this.coffeeMachine.getReport(cmr));
+        assertEquals("T:0;O:0;C:0;H:0;0", this.coffeeMachine.getReport());
 
         Order order = new Order(Drinks.COFFEE);
         this.coffeeMachine.payOrder(order, 60);
-        cmr.addSale(order);
-        assertEquals("C:1;H:0;O:0;T:0;60", this.coffeeMachine.getReport(cmr));
+        assertEquals("T:0;O:0;C:1;H:0;60", this.coffeeMachine.getReport());
 
         order = new Order(Drinks.TEA);
         this.coffeeMachine.payOrder(order, 40);
-        cmr.addSale(order);
-        assertEquals("C:1;H:0;O:0;T:1;100", this.coffeeMachine.getReport(cmr));
+        assertEquals("T:1;O:0;C:1;H:0;100", this.coffeeMachine.getReport());
 
     }
 

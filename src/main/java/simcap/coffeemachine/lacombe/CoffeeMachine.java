@@ -11,10 +11,13 @@ public class CoffeeMachine {
     private CoffeeMachineReportAdapter cmrAdapter;
     private final NotEnoughMoneyMessage notEnoughMoneyMessage = new NotEnoughMoneyMessage("Il vous manque ");
 
-    public CoffeeMachine() {
+    private CoffeeMachineReport cmr;
+
+    public CoffeeMachine(CoffeeMachineReport cmr) {
         this.orderAdapter = new OrderAdapter();
         this.messageAdapter = new MessageAdapter();
-        this.cmrAdapter = new CoffeeMachineReportAdapter();
+        this.cmr = cmr;
+        this.cmrAdapter = new CoffeeMachineReportAdapter(cmr);
     }
 
     public String getOrder(Order order) {
@@ -27,13 +30,15 @@ public class CoffeeMachine {
 
     public String payOrder(Order order, int money) {
         int price = order.getDrink().getPrice();
-        if (money >= price)
+        if (money >= price) {
+            cmr.addSale(order);
             return this.getOrder(order);
+        }
         notEnoughMoneyMessage.setDifference(price-money);
         return this.showMessage(notEnoughMoneyMessage);
     }
 
-    public String getReport(CoffeeMachineReport cmr) {
-        return this.cmrAdapter.formatReport(cmr);
+    public String getReport() {
+        return this.cmrAdapter.formatReport();
     }
 }

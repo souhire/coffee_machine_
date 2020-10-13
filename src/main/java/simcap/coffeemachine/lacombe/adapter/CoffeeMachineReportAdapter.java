@@ -8,7 +8,13 @@ import java.util.Map;
 
 public class CoffeeMachineReportAdapter {
 
-    public String formatReport(CoffeeMachineReport cmr) {
+    private CoffeeMachineReport cmr;
+
+    public CoffeeMachineReportAdapter(CoffeeMachineReport cmr) {
+        this.cmr = cmr;
+    }
+
+    public String formatReport() {
         Map<Drinks, Integer> map = cmr.getSales();
         final String[] retour = {""};
         map.forEach((key, value) -> {

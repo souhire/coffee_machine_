@@ -87,7 +87,7 @@ public class CoffeeMachineTest {
         Order order = new Order(Drinks.CHOCHOLATE);
         order.setExtraHot();
         order.addSugar();
-        assertEquals("Hh:1:", this.coffeeMachine.payOrder(order, 60));
+        assertEquals("Hh:1:0", this.coffeeMachine.payOrder(order, 60));
     }
 
     @Test
@@ -96,7 +96,7 @@ public class CoffeeMachineTest {
         order.setExtraHot();
         order.addSugar();
         order.addSugar();
-        assertEquals("Th:2:", this.coffeeMachine.payOrder(order, 60));
+        assertEquals("Th:2:0", this.coffeeMachine.payOrder(order, 60));
     }
 
 }

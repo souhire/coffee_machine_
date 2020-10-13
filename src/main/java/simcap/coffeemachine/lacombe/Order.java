@@ -4,6 +4,7 @@ public class Order {
 
     private Drinks drink;
     private int sugar = 0;
+    private boolean extraHot = false;
 
     public Order(Drinks drink) {
         this.drink = drink;
@@ -21,4 +22,11 @@ public class Order {
         return this.sugar;
     }
 
+    public void setExtraHot() {
+        this.extraHot = !extraHot;
+    }
+
+    public boolean isExtraHot() {
+        return extraHot;
+    }
 }

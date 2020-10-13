@@ -4,7 +4,8 @@ public enum Drinks {
 
     COFFEE("C",60),
     TEA("T", 40),
-    CHOCHOLATE("H", 50);
+    CHOCHOLATE("H", 50),
+    ORANGE("O", 60);
 
     private final String drink;
     private final int price;

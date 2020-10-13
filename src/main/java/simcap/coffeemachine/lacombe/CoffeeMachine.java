@@ -7,6 +7,7 @@ public class CoffeeMachine {
 
     private OrderAdapter orderAdapter;
     private MessageAdapter messageAdapter;
+    private final NotEnoughMoneyMessage notEnoughMoneyMessage = new NotEnoughMoneyMessage("Il vous manque ");
 
     public CoffeeMachine() {
         this.orderAdapter = new OrderAdapter();
@@ -21,8 +22,12 @@ public class CoffeeMachine {
         return this.messageAdapter.formatMessage(message);
     }
 
-    public String payOrder() {
-        return "";
+    public String payOrder(Order order, int money) {
+        int price = order.getDrink().getPrice();
+        if (money >= price)
+            return this.getOrder(order);
+        notEnoughMoneyMessage.setDifference(price-money);
+        return this.showMessage(notEnoughMoneyMessage);
     }
 
 }

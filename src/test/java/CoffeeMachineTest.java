@@ -51,12 +51,18 @@ public class CoffeeMachineTest {
     public void testGetOrderWithEnoughMoney() {
         Order order = new Order(Drinks.COFFEE);
 
-        assertEquals("C:2:0", this.coffeeMachine.payOrder());
+        assertEquals("C::", this.coffeeMachine.payOrder(order, 60));
+
+        order.addSugar();
+        order.addSugar();
+        assertEquals("C:2:0", this.coffeeMachine.payOrder(order, 70));
     }
 
     @Test
     public void testGetOrderWithoutEnoughMoney() {
+        Order order = new Order(Drinks.COFFEE);
 
+        assertEquals("M:Il vous manque 30", this.coffeeMachine.payOrder(order, 30));
 
     }
 

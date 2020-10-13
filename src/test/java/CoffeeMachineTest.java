@@ -99,4 +99,18 @@ public class CoffeeMachineTest {
         assertEquals("Th:2:0", this.coffeeMachine.payOrder(order, 60));
     }
 
+    @Test
+    public void testReport() {
+        assertEquals("C:0;H:0;T:0;0", this.coffeeMachine.getReport());
+
+        Order order = new Order(Drinks.COFFEE);
+        this.coffeeMachine.payOrder(order, 60);
+        assertEquals("C:1;H:0;T:0;60", this.coffeeMachine.getReport());
+
+        order = new Order(Drinks.TEA);
+        this.coffeeMachine.payOrder(order, 40);
+        assertEquals("C:1;H:0;T:1;100", this.coffeeMachine.getReport());
+
+    }
+
 }

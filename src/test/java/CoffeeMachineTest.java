@@ -1,9 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
-import simcap.coffeemachine.lacombe.CoffeeMachine;
-import simcap.coffeemachine.lacombe.Drinks;
-import simcap.coffeemachine.lacombe.Message;
-import simcap.coffeemachine.lacombe.Order;
+import simcap.coffeemachine.lacombe.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -101,15 +98,18 @@ public class CoffeeMachineTest {
 
     @Test
     public void testReport() {
-        assertEquals("C:0;H:0;T:0;0", this.coffeeMachine.getReport());
+        CoffeeMachineReport cmr = new CoffeeMachineReport();
+        assertEquals("C:0;H:0;O:0;T:0;0", this.coffeeMachine.getReport(cmr));
 
         Order order = new Order(Drinks.COFFEE);
         this.coffeeMachine.payOrder(order, 60);
-        assertEquals("C:1;H:0;T:0;60", this.coffeeMachine.getReport());
+        cmr.addSale(order);
+        assertEquals("C:1;H:0;O:0;T:0;60", this.coffeeMachine.getReport(cmr));
 
         order = new Order(Drinks.TEA);
         this.coffeeMachine.payOrder(order, 40);
-        assertEquals("C:1;H:0;T:1;100", this.coffeeMachine.getReport());
+        cmr.addSale(order);
+        assertEquals("C:1;H:0;O:0;T:1;100", this.coffeeMachine.getReport(cmr));
 
     }
 

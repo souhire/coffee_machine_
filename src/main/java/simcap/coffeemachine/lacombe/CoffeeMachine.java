@@ -21,4 +21,8 @@ public class CoffeeMachine {
         return this.messageAdapter.formatMessage(message);
     }
 
+    public String payOrder() {
+        return "";
+    }
+
 }

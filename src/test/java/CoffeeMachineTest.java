@@ -47,4 +47,17 @@ public class CoffeeMachineTest {
         assertEquals("M:Ceci est un message", this.coffeeMachine.showMessage(message));
     }
 
+    @Test
+    public void testGetOrderWithEnoughMoney() {
+        Order order = new Order(Drinks.COFFEE);
+
+        assertEquals("C:2:0", this.coffeeMachine.payOrder());
+    }
+
+    @Test
+    public void testGetOrderWithoutEnoughMoney() {
+
+
+    }
+
 }

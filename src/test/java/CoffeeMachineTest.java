@@ -1,16 +1,26 @@
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import simcap.coffeemachine.lacombe.*;
+import simcap.coffeemachine.lacombe.interfaces.BeverageQuantityChecker;
+import simcap.coffeemachine.lacombe.interfaces.EmailNotifier;
 
 import static org.junit.Assert.assertEquals;
 
 public class CoffeeMachineTest {
 
     CoffeeMachine coffeeMachine;
+    BeverageQuantityChecker beverageQuantityChecker = Mockito.mock(BeverageQuantityChecker.class);
+    EmailNotifier emailNotifier = Mockito.mock(EmailNotifier.class);
 
     @Before
     public void setUp() {
-        coffeeMachine = new CoffeeMachine(new CoffeeMachineReport());
+        MockitoAnnotations.initMocks(this);
+        coffeeMachine = new CoffeeMachine(new CoffeeMachineReport(), beverageQuantityChecker, emailNotifier);
     }
 
     @Test
@@ -108,6 +118,14 @@ public class CoffeeMachineTest {
         this.coffeeMachine.payOrder(order, 40);
         assertEquals("T:1;O:0;C:1;H:0;100", this.coffeeMachine.getReport());
 
+    }
+
+    @Test
+    public void testShortage() {
+        Mockito.when(this.beverageQuantityChecker.isEmpty(Mockito.any())).thenReturn(true);
+        Order order = new Order(Drinks.COFFEE);
+        assertEquals("M:Rupture, une notification va être envoyée",
+                this.coffeeMachine.payOrder(order, 90));
     }
 
 }
